@@ -79,6 +79,17 @@ const App = () => {
       <div>
         <p>{user.name} logged in</p>
       </div>
+      <div>
+        <button onClick = {() => {
+          setUser(null)
+          username.reset()
+          password.reset()
+/*          blogService.setToken(null)  */
+        }}
+        >
+        logout
+        </button>
+      </div>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
