@@ -82,8 +82,8 @@ const App = () => {
       <div>
         <button onClick = {() => {
           setUser(null)
-          username.reset()
-          password.reset()
+          setUsername('')
+          setPassword('')
 /*          blogService.setToken(null)  */
         }}
         >
