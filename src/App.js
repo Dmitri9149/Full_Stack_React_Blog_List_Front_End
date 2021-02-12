@@ -84,6 +84,7 @@ const App = () => {
           setUser(null)
           setUsername('')
           setPassword('')
+          window.localStorage.clear()
 /*          blogService.setToken(null)  */
         }}
         >
