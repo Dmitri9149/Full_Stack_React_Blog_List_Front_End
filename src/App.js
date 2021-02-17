@@ -34,7 +34,6 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
-    console.log("in Login function")
     
     try {
       const user = await loginService.login({
@@ -63,7 +62,6 @@ const App = () => {
 
   const addBlog = async (event) => {
     const sortBlogs = (blogs) => blogs.sort((b,a) => (a.likes-b.likes))
-    console.log("in Add Blog===========")
 
     try {
       event.preventDefault()
@@ -74,7 +72,6 @@ const App = () => {
         url:newUrl,
         likes:newLikes
       }
-      console.log("title", blogObject)
 
       await blogService.create(blogObject)
       const renewedBlogs = await blogService.getAll()
@@ -88,9 +85,6 @@ const App = () => {
 //      notify('some problems with blog addition')
     }
   }
-
-
-
 
   if (user === null) {
     return (
@@ -133,7 +127,6 @@ const App = () => {
           setUsername('')
           setPassword('')
           window.localStorage.clear()
-/*          blogService.setToken(null)  */
         }}
         >
         logout
