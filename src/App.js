@@ -9,7 +9,6 @@ const App = () => {
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
   const [user, setUser] = useState(null)
-  const [newLikes, setNewLikes] = useState(0)
   const [notification, setNotification] = useState({
     message: null
   })
