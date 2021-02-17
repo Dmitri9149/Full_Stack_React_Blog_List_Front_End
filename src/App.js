@@ -58,6 +58,9 @@ const App = () => {
   }
 
   const handleNewTitle = ({target}) => setNewTitle(target.value)
+  const handleNewAuthor = ({target}) => setNewAuthor(target.value)
+  const handleNewUrl = ({target}) => setNewUrl(target.value)
+
   const addBlog = async (event) => {
     const sortBlogs = (blogs) => blogs.sort((b,a) => (a.likes-b.likes))
     console.log("in Add Blog===========")
@@ -143,6 +146,9 @@ const App = () => {
           newUrl={newUrl}
           newAuthor = { newAuthor }
           handleNewTitle = {handleNewTitle}
+          handleNewAuthor = {handleNewAuthor}
+          handleNewUrl = {handleNewUrl}
+
 
         />
       <div>
