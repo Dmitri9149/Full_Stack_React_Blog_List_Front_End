@@ -2,12 +2,20 @@ import React, { useState, useEffect } from 'react'
 import Blog from './components/Blog'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import BlogForm from './components/BlogForm'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [username, setUsername] = useState('') 
   const [password, setPassword] = useState('') 
   const [user, setUser] = useState(null)
+  const [newLikes, setNewLikes] = useState(0)
+  const [notification, setNotification] = useState({
+    message: null
+  })
+  const [newTitle, setNewTitle] = useState("")
+  const [newUrl, setNewUrl] = useState("")
+  const [newAuthor, setNewAuthor] = useState("")
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
@@ -26,6 +34,7 @@ const App = () => {
 
   const handleLogin = async (event) => {
     event.preventDefault()
+    console.log("in Login function")
     
     try {
       const user = await loginService.login({
@@ -40,12 +49,46 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (exception) {
+      console.log("something is wrong with setToken or loginService")
 //      setErrorMessage('wrong credentials')
 //      setTimeout(() => {
 //        setErrorMessage(null)
 //      }, 5000)
     }
   }
+
+  const handleNewTitle = ({target}) => setNewTitle(target.value)
+  const addBlog = async (event) => {
+    const sortBlogs = (blogs) => blogs.sort((b,a) => (a.likes-b.likes))
+    console.log("in Add Blog===========")
+
+    try {
+      event.preventDefault()
+
+      const blogObject = {
+        author: newAuthor,
+        title: newTitle,
+        url:newUrl,
+        likes:newLikes
+      }
+      console.log("title", blogObject)
+
+      await blogService.create(blogObject)
+      const renewedBlogs = await blogService.getAll()
+      setBlogs(sortBlogs(renewedBlogs))
+//      notify(`a new blog ${newTitle.value} by ${newAuthor.value} added`)
+      setNewTitle("")
+      setNewAuthor("")
+      setNewUrl("")
+      setNewLikes(0)
+    } catch(exception) {
+//      notify('some problems with blog addition')
+    }
+  }
+
+
+
+
   if (user === null) {
     return (
       <div>
@@ -92,6 +135,17 @@ const App = () => {
         >
         logout
         </button>
+        </div>
+      <h2>New Blog</h2>
+        <BlogForm
+          addBlog={addBlog}
+          newTitle={newTitle}
+          newUrl={newUrl}
+          newAuthor = { newAuthor }
+          handleNewTitle = {handleNewTitle}
+
+        />
+      <div>
       </div>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
