@@ -5,7 +5,9 @@ const BlogForm = ({
   newTitle,
   newAuthor,
   newUrl,
-  handleNewTitle
+  handleNewTitle,
+  handleNewAuthor,
+  handleNewUrl,
 }) => {
   return(
     <div>
@@ -20,15 +22,15 @@ const BlogForm = ({
         <div>
           author
           <input
-            {...newAuthor}
-            reset = '*'
+            value = {newAuthor}
+            onChange = {handleNewAuthor}
           />
         </div>
         <div>
           url
           <input
-            {...newUrl}
-            reset ='*'
+            value = {newUrl}
+            onChange = {handleNewUrl}
           />
         </div>
 
