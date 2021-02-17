@@ -70,7 +70,6 @@ const App = () => {
         author: newAuthor,
         title: newTitle,
         url:newUrl,
-        likes:newLikes
       }
 
       await blogService.create(blogObject)
@@ -80,7 +79,6 @@ const App = () => {
       setNewTitle("")
       setNewAuthor("")
       setNewUrl("")
-      setNewLikes(0)
     } catch(exception) {
 //      notify('some problems with blog addition')
     }
